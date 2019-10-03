@@ -1,0 +1,273 @@
+1). Modifier
+    A). private EditText mReply;
+    B). private TextView mReplyHeadTextView;
+    C). private TextView mReplyTextView;
+
+2). Method
+    A). tombol=findViewById(R.id.buttontoast);
+        tombol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Tombol Toast telah berhasil", Toast.LENGTH_SHORT).show();
+            }
+        });
+    
+    B). tombol2=findViewById(R.id.buttoncount);
+        result=findViewById(R.id.hasil);
+        angka=0;
+        tombol2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                angka= angka+1;
+                result.setText(String.valueOf(angka));
+            }
+        });
+    
+    C).  btn1.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             angka=angka+1;
+             result.setText(String.valueOf(angka));
+         }
+	});
+
+    D). btn2.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             angka=angka-1;
+             result.setText(String.valueOf(angka));
+         }
+        }); 
+
+3). Class
+    
+    A).public class MainActivity extends AppCompatActivity {
+          private static final String LOG_TAG =
+            MainActivity.class.getSimpleName();
+
+          public static final String EXTRA_MESSAGE =
+            "com.example.android.twoactivities.extra.MESSAGE";
+
+          private EditText mMessageEditText;
+
+          public static final int TEXT_REQUEST = 1;
+
+          private TextView mReplyHeadTextView;
+          private TextView mReplyTextView;
+
+          @Override
+          protected void onCreate(Bundle savedInstanceState) {
+             super.onCreate(savedInstanceState);
+             setContentView(R.layout.activity_main);
+             mMessageEditText = findViewById(R.id.editText_main);
+             mReplyHeadTextView = findViewById(R.id.text_header_reply);
+             mReplyTextView = findViewById(R.id.text_message_reply);
+          }
+
+          public void launchSecondActivity(View view) {
+            Log.d(LOG_TAG, "Button clicked!");
+            Intent intent = new Intent(this, SecondActivity.class);
+            String message = mMessageEditText.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivityForResult(intent, TEXT_REQUEST);
+          }
+    
+          @Override
+          public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+             super.onActivityResult(requestCode, resultCode, data);
+               if (requestCode == TEXT_REQUEST) {
+                 if (resultCode == RESULT_OK) {
+                    String reply = data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                    mReplyHeadTextView.setVisibility(View.VISIBLE);
+                    mReplyTextView.setText(reply);
+                    mReplyTextView.setVisibility(View.VISIBLE);
+                 }
+               }
+          }
+        }
+    
+    B). public class SecondActivity extends AppCompatActivity {
+          public static final String EXTRA_REPLY =
+            "com.example.android.twoactivities.extra.REPLY";
+          private EditText mReply;
+        
+           @Override
+          protected void onCreate(Bundle savedInstanceState) {
+             super.onCreate(savedInstanceState);
+             setContentView(R.layout.activity_second);
+             mReply=findViewById(R.id.editText_second);
+             Intent intent = getIntent();
+             String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+             TextView textView = findViewById(R.id.text_message);
+             textView.setText(message);
+          }
+
+           public void returnReply(View view) {
+             String reply = mReply.getText().toString();
+             Intent replyIntent = new Intent();
+             replyIntent.putExtra(EXTRA_REPLY, reply);
+             setResult(RESULT_OK, replyIntent);
+             finish();
+           }
+        }
+
+4). Function
+    A). public void launchSecondActivity(View view) {
+         Log.d(LOG_TAG, "Button clicked!");
+         Intent intent = new Intent(this, SecondActivity.class);
+         String message = mMessageEditText.getText().toString();
+         intent.putExtra(EXTRA_MESSAGE, message);
+         startActivityForResult(intent, TEXT_REQUEST);
+        } 
+   
+    B). public void onActivityResult(int requestCode,
+                                 int resultCode, Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+         if (requestCode == TEXT_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                String reply = data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                mReplyHeadTextView.setVisibility(View.VISIBLE);
+                mReplyTextView.setText(reply);
+                mReplyTextView.setVisibility(View.VISIBLE);
+            }
+         }
+        }
+    
+    C). public void returnReply(View view) {
+          String reply = mReply.getText().toString();
+          Intent replyIntent = new Intent();
+          replyIntent.putExtra(EXTRA_REPLY, reply);
+          setResult(RESULT_OK, replyIntent);
+          finish();
+        }
+
+5). Constructor
+    A). name = findViewById(R.id.nama);
+        name.setText("Hallo "+ message);
+    
+    B). tombol2=findViewById(R.id.buttoncount);
+        result=findViewById(R.id.hasil);
+        angka=0;
+        tombol2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                angka= angka+1;
+                result.setText(String.valueOf(angka));
+            }
+        });
+
+        
+6). Polimorfisme
+    A). Intent intent = new Intent(this, SecondActivity.class);
+    
+    B). Intent intent = new Intent(this, TampilanKedua.class);
+
+    C). Intent intent = new Intent(this, SecondInterface.class);
+
+7). Inheritance
+    A). public class MainActivity extends AppCompatActivity {
+        Button tombol,tombol2;
+        int angka;
+        TextView result;
+
+        @Override
+         protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_main);
+
+         tombol=findViewById(R.id.buttontoast);
+         tombol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Tombol Toast telah berhasil", Toast.LENGTH_SHORT).show();
+            }
+         });
+
+         tombol2=findViewById(R.id.buttoncount);
+         result=findViewById(R.id.hasil);
+         angka=0;
+         tombol2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                angka= angka+1;
+                result.setText(String.valueOf(angka));
+            }
+          });
+         }
+        }
+
+
+    B). public class MainActivity extends AppCompatActivity {
+        private static final String LOG_TAG =
+           MainActivity.class.getSimpleName();
+
+
+        public static final String EXTRA_MESSAGE =
+            "com.example.android.twoactivities.extra.MESSAGE";
+
+        private EditText mMessageEditText;
+
+        public static final int TEXT_REQUEST = 1;
+ 
+        private TextView mReplyHeadTextView;
+        private TextView mReplyTextView;
+
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+          super.onCreate(savedInstanceState);
+          setContentView(R.layout.activity_main);
+          mMessageEditText = findViewById(R.id.editText_main);
+          mReplyHeadTextView = findViewById(R.id.text_header_reply);
+          mReplyTextView = findViewById(R.id.text_message_reply);
+        }
+
+        public void launchSecondActivity(View view) {
+           Log.d(LOG_TAG, "Button clicked!");
+           Intent intent = new Intent(this, SecondActivity.class);
+           String message = mMessageEditText.getText().toString();
+           intent.putExtra(EXTRA_MESSAGE, message);
+           startActivityForResult(intent, TEXT_REQUEST);
+
+        }
+         @Override
+           public void onActivityResult(int requestCode,int resultCode, Intent data) {
+             super.onActivityResult(requestCode, resultCode, data);
+              if (requestCode == TEXT_REQUEST) {
+                 if (resultCode == RESULT_OK) {
+                     String reply = data.getStringExtra(SecondActivity.EXTRA_REPLY);
+                     mReplyHeadTextView.setVisibility(View.VISIBLE);
+                     mReplyTextView.setText(reply);
+                     mReplyTextView.setVisibility(View.VISIBLE);
+                 }
+              }
+            }
+         }
+
+
+    C). public class MainActivity extends AppCompatActivity {
+         EditText input;
+
+         public static final String EXTRA_MESSAGE =
+            "com.example.android.d1041161017_tugastoastactiv.extra.MESSAGE";
+
+         public static final int TEXT_REQUEST = 1;
+ 
+         @Override
+         protected void onCreate(Bundle savedInstanceState) {
+           super.onCreate(savedInstanceState);
+           setContentView(R.layout.activity_main);
+           input = findViewById(R.id.inputnama);
+         }
+
+         public void launchSecondActivity(View view) {
+            String message = input.getText().toString();
+            Intent intent = new Intent(this, SecondActivity.class);
+            message = input.getText().toString();
+            intent.putExtra(EXTRA_MESSAGE, message);
+            startActivityForResult(intent, TEXT_REQUEST);
+         }
+        }
+
+
